@@ -8,6 +8,7 @@ export default function SearchBar(props) {
       className='search-bar'
       type='text'
       placeholder={props.placeholder || 'Search...'}
+      disabled={props.disabled}
     />
   )
 }
