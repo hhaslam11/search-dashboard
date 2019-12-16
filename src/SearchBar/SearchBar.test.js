@@ -82,6 +82,21 @@ test('runs onChange function with a timeout', async () => {
   await new Promise(resolve => setTimeout(resolve, 100));
   expect(mockCallback).toHaveBeenCalledTimes(0);
 
-  await new Promise(resolve => setTimeout(resolve, 250));
+  await new Promise(resolve => setTimeout(resolve, 350));
   expect(mockCallback).toHaveBeenCalledTimes(1);
+});
+
+test('renders with invalid timeout', () => {
+  render(<SearchBar timeout={-1} />);
+  render(<SearchBar timeout={'invalid'} />);
+  render(<SearchBar timeout={1.23} />);
+});
+
+test('renders with invalid placeholder', () => {
+  render(<SearchBar placeholder={-1} />);
+});
+
+test('renders with invalid onChange callback', () => {
+  render(<SearchBar onChange={1} />);
+  render(<SearchBar placeholder={'test'} />);
 });
