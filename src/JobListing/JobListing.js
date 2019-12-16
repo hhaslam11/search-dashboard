@@ -41,7 +41,8 @@ export default function JobListing(props) {
         </div>
       </div>
       <div className="job-description">
-        {props.jobDesc}
+        {props.jobDesc + ' '}
+        <a href={props.url} target="_blank" rel="noopener noreferrer" alt="Apply now">read more</a>
       </div>
       <div className="job-footer">
         <div className="job-posted-date">
