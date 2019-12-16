@@ -1,0 +1,115 @@
+@import '../variables';
+
+.job-listing {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: $color-card-background;
+  
+  width: 400px;
+  height: 50%;
+
+  padding: 20px;
+  padding-bottom: 10px;
+
+  border: 1px solid grey;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px grey;
+
+  .job-title {
+    font-size: large;
+
+    height: 30%;
+    margin-bottom: 10px;
+
+    .job-info {
+      display: flex;
+      justify-content: space-between;
+      
+      color: lighten(black, 20%);
+      font-size: small;
+
+      padding-top: 10px;
+      
+      .job-location {
+        
+        @if $debug {
+          border: 2px solid orange;
+        }
+      }
+
+      .job-salary {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+  
+  
+        @if $debug {
+          border: 2px solid purple;
+        }
+      }
+
+      @if $debug {
+        border: 2px solid pink;
+      }
+    }
+
+    @if $debug {
+      border: 2px solid blue;
+    }
+  }
+
+  .job-description {
+    font-size: small;
+    color: lighten(black, 20%);
+    
+    height: 50%;
+    overflow: hidden;
+    word-wrap: break-word;
+
+    padding-bottom: 20px;
+    @if $debug {
+      border: 2px solid yellow;
+    }
+  }
+  
+  .job-footer {
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+
+    .job-posted-date {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      color: lighten(black, 50%);
+      font-size: x-small;
+
+      @if $debug {
+        border: 2px solid cyan;
+      }
+    }
+
+    a.job-apply {
+      color: $color-link-main;
+      text-decoration: none;
+      &:hover {
+        color: $color-link-hover;
+      }
+
+      @if $debug {
+        border: 2px solid #3c7c54;
+      }
+    }
+
+    @if $debug {
+      border: 2px solid green;
+    }
+  }
+  @if $debug {
+    border: 2px solid red;
+  }
+}
