@@ -12,6 +12,7 @@ const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\
 /**
  * Display a job listing card.
  * @param {string} props.city City of the job posting
+ * @param {string} props.url Job listing/apply url
  * @param {string} props.country Country of the job posting
  * @param {string} props.companyName Name of company
  * @param {string} props.companyDesc Description of company
@@ -46,7 +47,7 @@ export default function JobListing(props) {
         <div className="job-posted-date">
           Posted {props.posted}
         </div>
-        <a href="#" className="job-apply">Apply Now</a>
+        <a href={props.url} target="_blank" rel="noopener noreferrer" alt="Apply now" className="job-apply">Apply Now</a>
       </div>
     </div>
   )

@@ -9,10 +9,9 @@ const jobInfo = JSON.parse(`{"total_jobs":142,"success":true,"num_paginable_jobs
 storiesOf('Job Listing', module)
   .add('Basic', () => <JobListing />)
   .add('With info', () => {
-    console.log(jobInfo);
-
     // Parse data
     const city         = jobInfo.city;
+    const url          = jobInfo.url;   
     const country      = jobInfo.country;
     const companyName  = jobInfo.hiring_company.name;
     const companyDesc  = jobInfo.hiring_company.description;
@@ -27,6 +26,7 @@ storiesOf('Job Listing', module)
     return (
       <JobListing
         city={city}
+        url={url}
         country={country}
         companyName={companyName}
         companyDesc={companyDesc}
