@@ -9,13 +9,22 @@ storiesOf('Search Bar', module)
   .add('With custom start value', () => <SearchBar value='Search term'/>)
   .add('Disabled', () => <SearchBar disabled/>)
   .add('With onChange', () => {
-
     const [state, setState] = useState('');
     return (
       <>
         <h4>Query value</h4>
         <p>{state}</p>
         <SearchBar onChange={query => setState(query)}/>
+      </>
+    )
+  })
+  .add('onChange with timeout', () => {
+    const [state, setState] = useState('');
+    return (
+      <>
+        <h4>Query value</h4>
+        <p>{state}</p>
+        <SearchBar timeout={750} onChange={query => setState(query)}/>
       </>
     )
   });
