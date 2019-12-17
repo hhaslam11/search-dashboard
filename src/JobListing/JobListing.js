@@ -85,7 +85,8 @@ export default function JobListing(props) {
         </div>
       </div>
       <div className="job-description">
-        {props.jobDesc + ' '}
+        <span dangerouslySetInnerHTML={{__html: props.jobDesc}}></span> {/* TODO this isnt safe. */}
+        {' '}
         <a href={props.url} target="_blank" rel="noopener noreferrer">read more</a>
       </div>
       <div className="job-footer">

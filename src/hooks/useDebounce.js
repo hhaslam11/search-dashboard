@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
  * @param {*} ms time in ms to wait before triggering change
  */
 export default function useDebounce(input, ms) {
-  const [debounced, setDebounced] = useState("");
+  const [debounced, setDebounced] = useState(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => setDebounced(input), ms);

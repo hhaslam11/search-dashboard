@@ -19,7 +19,7 @@ export default function SearchBar(props) {
   const onChange = useCallback(props.onChange ? props.onChange : () => {}, []);
 
   useEffect(() => {
-    if (query !== '') onChange(query);
+    if (query !== null) onChange(query);
   }, [query, onChange]);
 
   return (
