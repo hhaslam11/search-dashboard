@@ -40,7 +40,7 @@ export default function JobListing(props) {
   if (props.companyUrl) {
     company = (
       <div className="job-company">
-        <a href={props.companyUrl} target="_blank" rel="noopener noreferrer">
+        <a href={props.companyUrl} data-testid="company-link" target="_blank" rel="noopener noreferrer">
           {props.companyName}
         </a>
       </div>
@@ -93,13 +93,13 @@ export default function JobListing(props) {
       </div>
       <div className="job-description">
         {props.jobDesc + ' '}
-        <a href={props.url} target="_blank" rel="noopener noreferrer" alt="Apply now">read more</a>
+        <a href={props.url} target="_blank" rel="noopener noreferrer">read more</a>
       </div>
       <div className="job-footer">
         <div className="job-posted-date">
           Posted {props.posted}
         </div>
-        <a href={props.url} target="_blank" rel="noopener noreferrer" alt="Apply now" className="job-apply">Apply Now</a>
+        <a href={props.url} target="_blank" rel="noopener noreferrer" className="job-apply">Apply Now</a>
       </div>
     </div>
   )
