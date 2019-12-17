@@ -29,29 +29,29 @@ function App() {
 
     axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=&jobs_per_page=10&page=1&api_key=${API_KEY}`)
       .then(res => {
-        console.log(res);
-
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
           return;
         }
-        const job = parseApiData(res.data.jobs[0]);
-        console.log(job);
-        setState(<JobListing
-          city={job.city}
-          country={job.country}
-          url={job.url}
-          companyName={job.companyName}
-          jobName={job.jobName}
-          jobDesc={job.jobDesc}
-          posted={job.posted}
-          salaryMax={job.salaryMax}
-          salaryMin={job.salaryMin}
-        />);
-      });
-    // make api call with query
-    // then change state to JSX
 
+        const listings = res.data.jobs.map(el => {
+          let job = parseApiData(el);
+          return (
+            <JobListing
+              city={job.city}
+              country={job.country}
+              url={job.url}
+              companyName={job.companyName}
+              jobName={job.jobName}
+              jobDesc={job.jobDesc}
+              posted={job.posted}
+              salaryMax={job.salaryMax}
+              salaryMin={job.salaryMin}
+            />
+          )
+        });
+        setState(listings);
+      });
   }, [query]);
 
   return (
