@@ -23,11 +23,29 @@ const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\
  * @param {string} props.salaryMin Min salary
  */
 export default function JobListing(props) {
+
+  // Add link to company info if avaliable
+  let company;
+  if (props.companyUrl) {
+    company = (
+      <div className="job-company">
+        <a href={props.companyUrl} target="_blank" rel="noopener noreferrer">
+          {props.companyName}
+        </a>
+      </div>
+    )
+  } else {
+    company = (
+      <div className="job-company">
+        {props.companyName}
+      </div>
+    );
+  }
   return (
     <div className="job-listing">
       <div className="job-title">
         <div>{props.jobName}</div>
-        <div className="job-company">{props.companyName}</div>
+        {company}
         <div className="job-info">
           <div className="job-location">
             {props.city && `${props.city}, `}{props.country}

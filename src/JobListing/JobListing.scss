@@ -27,6 +27,13 @@
     .job-company {
       font-size: small;
 
+      a {
+        color: darken($color-accent, 5%);
+        text-decoration: none;
+        &:hover {
+          color: darken(#f26e27, 10%);
+        }
+      }
       @if $debug {
         border: 2px solid aquamarine;
       }
