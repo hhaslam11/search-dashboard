@@ -1,4 +1,3 @@
-
 /**
  * Parse job object from zipSearch api
  * @param {object} apiData job object from zipSearch api
