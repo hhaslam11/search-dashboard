@@ -40,7 +40,6 @@
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "cypress": "^3.8.0",
     "jest": "^24.9.0"
   }
 }

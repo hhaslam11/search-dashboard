@@ -12,13 +12,13 @@ const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\
 /**
  * Display a job listing card.
  * @param {string} props.city City of the job posting
- * @param {string} props.url Job listing/apply url
+ * @param {string} props.url Job listing/apply url <required>
  * @param {string} props.country Country of the job posting
- * @param {string} props.companyName Name of company
+ * @param {string} props.companyName Name of company <required>
  * @param {string} props.companyUrl Company website
- * @param {string} props.jobName Name of job. example "Senior ruby on rails developer"
- * @param {string} props.jobDesc Description of job
- * @param {string} props.posted Date posted (user friendly format)
+ * @param {string} props.jobName Name of job. example "Senior ruby on rails developer" <required>
+ * @param {string} props.jobDesc Description of job <required>
+ * @param {string} props.posted Date posted (user friendly format) <required>
  * @param {string} props.salaryMax Max salary
  * @param {string} props.salaryMin Min salary
  */
