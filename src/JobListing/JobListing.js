@@ -35,7 +35,6 @@ export default function JobListing(props) {
       return null;
     }
 
-
   // Add link to company website if avaliable
   let company;
   if (props.companyUrl) {
@@ -53,6 +52,31 @@ export default function JobListing(props) {
       </div>
     );
   }
+
+  //Get currency formatting
+  let currency;
+  if (!props.salaryMin && !props.salaryMax) {
+    currency = null;
+  } else if (props.salaryMin === props.salaryMax) {
+    currency = '$' + parseCurrency(props.salaryMin);
+  } else if (props.salaryMin && !props.salaryMax) {
+    currency = '$' + parseCurrency(props.salaryMin);
+  } else if (!props.salaryMin && props.salaryMax) {
+    currency = '$' + parseCurrency(props.salaryMax);
+  } else {
+    currency = `$${currency = parseCurrency(props.salaryMin)} - $${currency = parseCurrency(props.salaryMax)}`;
+  }
+
+  //Get location formatting
+  let location;
+  if (props.country && props.city) {
+    location = `${props.city}, ${props.country}`;
+  } else if (!props.country && !props.city) {
+    location = null;
+  } else {
+    location = `${props.country ? props.country : ''}${props.city ? props.city : ''}`;
+  }
+
   return (
     <div className="job-listing">
       <div className="job-title">
@@ -60,10 +84,10 @@ export default function JobListing(props) {
         {company}
         <div className="job-info">
           <div className="job-location">
-            {props.city && `${props.city}, `}{props.country}
+            {location}
           </div>
           <div className="job-salary">
-            ${parseCurrency(props.salaryMin)} - ${parseCurrency(props.salaryMax)}
+            {currency}
           </div>
         </div>
       </div>

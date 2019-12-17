@@ -44,10 +44,10 @@
       color: lighten(black, 20%);
       font-size: small;
 
-      padding-top: 10px;
+      padding-top: 7px;
+      height: 19px;
       
       .job-location {
-        
         @if $debug {
           border: 2px solid orange;
         }
