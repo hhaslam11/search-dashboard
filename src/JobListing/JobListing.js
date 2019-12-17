@@ -15,22 +15,19 @@ const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\
  * @param {string} props.url Job listing/apply url
  * @param {string} props.country Country of the job posting
  * @param {string} props.companyName Name of company
- * @param {string} props.companyDesc Description of company
  * @param {string} props.companyUrl Company website
  * @param {string} props.jobName Name of job. example "Senior ruby on rails developer"
  * @param {string} props.jobDesc Description of job
  * @param {string} props.posted Date posted (user friendly format)
  * @param {string} props.salaryMax Max salary
  * @param {string} props.salaryMin Min salary
- * @param {string} props.salarySource Source of salary information
  */
 export default function JobListing(props) {
-
-
   return (
     <div className="job-listing">
       <div className="job-title">
         <div>{props.jobName}</div>
+        <div className="job-company">{props.companyName}</div>
         <div className="job-info">
           <div className="job-location">
             {props.city && `${props.city}, `}{props.country}

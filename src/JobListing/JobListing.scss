@@ -24,6 +24,13 @@
     height: 30%;
     margin-bottom: 10px;
 
+    .job-company {
+      font-size: small;
+
+      @if $debug {
+        border: 2px solid aquamarine;
+      }
+    }
     .job-info {
       display: flex;
       justify-content: space-between;
@@ -72,10 +79,10 @@
     padding-bottom: 20px;
 
     a {
-      color: $color-link-main;
+      color: darken($color-accent, 5%);
       text-decoration: none;
       &:hover {
-        color: $color-link-hover;
+        color: darken(#f26e27, 10%);
       }
     }
     @if $debug {
@@ -102,10 +109,17 @@
     }
 
     a.job-apply {
-      color: $color-link-main;
+      background-color: $color-accent;
+      color: #fff;
+
+      padding: 5px;
+      padding-left: 7px;
+      padding-right: 7px;
+      border-radius: 5px;
+
       text-decoration: none;
       &:hover {
-        color: $color-link-hover;
+        background-color: darken($color-accent, 10%);
       }
 
       @if $debug {
