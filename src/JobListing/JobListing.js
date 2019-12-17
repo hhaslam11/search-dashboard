@@ -24,7 +24,19 @@ const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\
  */
 export default function JobListing(props) {
 
-  // Add link to company info if avaliable
+  // Check that the required information is given, or else skip rendering
+  if (
+    !props.url ||
+    !props.companyName ||
+    !props.jobName ||
+    !props.jobDesc ||
+    !props.posted) {
+      console.log('warning: canceling render of job listing because the required information isnt avaliable.');
+      return null;
+    }
+
+
+  // Add link to company website if avaliable
   let company;
   if (props.companyUrl) {
     company = (
