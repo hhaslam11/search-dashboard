@@ -1,14 +1,7 @@
 import React from 'react';
 
+import parseCurrency from '../helpers/parseCurrency';
 import './JobListing.scss';
-
-/**
- * Add spaces to a number to a currency-friendly format.
- * Example: 123456 --> 123 456
- * @param {string} currency unformatted string or integer.
- */
-const parseCurrency = currency => currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
 /**
  * Display a job listing card.
  * @param {string} props.city City of the job posting
