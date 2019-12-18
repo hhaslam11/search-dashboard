@@ -4,6 +4,7 @@ import axios from 'axios';
 import JobListing from './JobListing/JobListing';
 import SearchBar from './SearchBar/SearchBar';
 import parseApiData from './helpers/parseApiData';
+import Loading from './Loading/Loading';
 
 import './App.scss';
 
@@ -78,7 +79,7 @@ function App() {
       </div>
       <div>
       <div className="results">
-        {state === LOADING && <h4>searching..</h4>}
+        {state === LOADING && <Loading/>}
         {state === NO_RESULTS && <h4>no results found</h4>}
         {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
       </div>
