@@ -30,7 +30,7 @@ function App() {
       return;
     }
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=&jobs_per_page=10&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=&jobs_per_page=30&page=1&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
