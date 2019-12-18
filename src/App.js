@@ -21,6 +21,8 @@ function App() {
     location: ''
   });
 
+  // run this every time the search query is updated.
+  // it will call the api and render the results
   useEffect(() => {
     if (!query.job && !query.location) {
       setState(EMPTY);
@@ -55,27 +57,33 @@ function App() {
   }, [query]);
 
   return (
-    <>
-      <SearchBar
-        placeholder='job'
-        timeout={750}
-        onChange={(searchQuery) => {
-          setState(LOADING);
-          setQuery(prev => ({ ...prev, job: searchQuery }));
-        }}
-      />
-      <SearchBar
-        placeholder='location'
-        timeout={750}
-        onChange={(searchQuery) => {
-          setState(LOADING);
-          setQuery(prev => ({ ...prev, location: searchQuery }));
-        }}
-      />
-      {state === LOADING && <h4>searching..</h4>}
-      {state === NO_RESULTS && <h4>no results found</h4>}
-      {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
-    </>
+    <div className="main">
+      <div className="search">
+        <SearchBar
+          placeholder='job'
+          timeout={750}
+          onChange={(searchQuery) => {
+            setState(LOADING);
+            setQuery(prev => ({ ...prev, job: searchQuery }));
+          }}
+        />
+        <SearchBar
+          placeholder='location'
+          timeout={750}
+          onChange={(searchQuery) => {
+            setState(LOADING);
+            setQuery(prev => ({ ...prev, location: searchQuery }));
+          }}
+        />
+      </div>
+      <div>
+      <div className="results">
+        {state === LOADING && <h4>searching..</h4>}
+        {state === NO_RESULTS && <h4>no results found</h4>}
+        {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
+      </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,32 @@
+@import './variables';
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  @if $debug {
+    border: 2px solid orchid;
+  }
+}
+
+.search {
+  height: 20%;
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 30px;
+  box-shadow: 1px 1px 3px grey;
+  @if $debug {
+    border: 2px solid rgb(207, 142, 57);
+  }
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @if $debug {
+    border: 2px solid chartreuse;
+  }
+}
