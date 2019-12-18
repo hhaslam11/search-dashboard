@@ -5,18 +5,29 @@ import JobListing from './JobListing/JobListing';
 import SearchBar from './SearchBar/SearchBar';
 import parseApiData from './helpers/parseApiData';
 import Loading from './Loading/Loading';
+import DaysPostedFilter from './DaysPostedFilter/DaysPostedFilter';
 
 import './App.scss';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const JOBS_PER_PAGE = 30;
 
 // state
 const LOADING = 'loading';
 const EMPTY = 'empty';
 const NO_RESULTS = 'no results';
 
+// define how many days map to each value for DaysPostedFilter
+const daysPostedMap = {
+  1: '',
+  2: 1,
+  3: 7,
+  4: 30
+};
+
 function App() {
   const [state, setState] = useState(EMPTY);
+  const [daysPosted, setDaysPosted] = useState(1);
   const [query, setQuery] = useState({
     job: '',
     location: ''
@@ -30,7 +41,7 @@ function App() {
       return;
     }
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=&jobs_per_page=30&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
@@ -55,13 +66,13 @@ function App() {
         });
         setState(listings);
       });
-  }, [query]);
+  }, [query, daysPosted]);
 
   return (
     <div className="main">
       <div className="search">
         <SearchBar
-          placeholder='job'
+          placeholder='Search Jobs'
           timeout={750}
           onChange={(searchQuery) => {
             setState(LOADING);
@@ -69,11 +80,17 @@ function App() {
           }}
         />
         <SearchBar
-          placeholder='location'
+          placeholder='Search Location'
           timeout={750}
           onChange={(searchQuery) => {
             setState(LOADING);
             setQuery(prev => ({ ...prev, location: searchQuery }));
+          }}
+        />
+        <DaysPostedFilter
+          onChange={val => {
+            setState(LOADING);
+            setDaysPosted(val);
           }}
         />
       </div>

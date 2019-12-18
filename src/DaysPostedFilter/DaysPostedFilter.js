@@ -7,9 +7,9 @@ import './DaysPostedFilter.scss';
  * of the option. 
  * Options will be 1-4, as follows
  * 1 - posted anytime
- * 2 - posted today
- * 3 - posted in the past week
- * 4 - posted in the past month
+ * 2 - posted in the last day
+ * 3 - posted in the past 7 days
+ * 4 - posted in the past 30 days
  */
 export default (props) => {
   if (!props.onChange) return null;
@@ -20,9 +20,9 @@ export default (props) => {
       className="posted-menu"
     >
       <option value={1}>Posted anytime</option>
-      <option value={2}>Posted today</option>
-      <option value={3}>Posted in the past week</option>
-      <option value={4}>Posted in the past month</option>
+      <option value={2}>Posted in the past day</option>
+      <option value={3}>Posted in the past 7 days</option>
+      <option value={4}>Posted in the past 30 days</option>
     </select>
   )
 };
