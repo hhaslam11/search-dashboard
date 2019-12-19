@@ -27,6 +27,7 @@ const daysPostedMap = {
   4: 30
 };
 
+// map values to miles for Radius Filter
 const rangeMap = {
   1: 10,
   2: 50,
@@ -88,27 +89,15 @@ function App() {
         <SearchBar
           placeholder='Search Jobs'
           timeout={750}
-          onChange={(searchQuery) => {
-            setQuery(prev => ({ ...prev, job: searchQuery }));
-          }}
+          onChange={(searchQuery) => setQuery(prev => ({ ...prev, job: searchQuery }))}
         />
         <SearchBar
           placeholder='Search Location'
           timeout={750}
-          onChange={(searchQuery) => {
-            setQuery(prev => ({ ...prev, location: searchQuery }));
-          }}
+          onChange={(searchQuery) => setQuery(prev => ({ ...prev, location: searchQuery }))}
         />
-        <DaysPostedFilter
-          onChange={val => {
-            setDaysPosted(val);
-          }}
-        />
-        <RadiusFilter
-          onChange={val => {
-            setRange(val);
-          }}
-        />
+        <DaysPostedFilter onChange={val => setDaysPosted(val)} />
+        <RadiusFilter onChange={val => setRange(val)} />
         <h3>range: {rangeMap[range]  || 'unlimited'} miles</h3>
       </div>
       <div>
