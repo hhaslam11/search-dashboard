@@ -5,11 +5,11 @@ import JobListing from './JobListing/JobListing';
 import SearchBar from './SearchBar/SearchBar';
 import parseApiData from './helpers/parseApiData';
 import Loading from './Loading/Loading';
+import RadiusFilter from './RadiusFilter/RadiusFilter';
 import DaysPostedFilter from './DaysPostedFilter/DaysPostedFilter';
 import useDebounce from './hooks/useDebounce';
 
 import './App.scss';
-import RadiusFilter from './RadiusFilter/RadiusFilter';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const JOBS_PER_PAGE = 30;
@@ -85,25 +85,32 @@ function App() {
 
   return (
     <div className="main">
-      <div className="search">
-        <SearchBar
-          placeholder='Search Jobs'
-          timeout={750}
-          onChange={(searchQuery) => setQuery(prev => ({ ...prev, job: searchQuery }))}
-        />
-        <SearchBar
-          placeholder='Search Location'
-          timeout={750}
-          onChange={(searchQuery) => setQuery(prev => ({ ...prev, location: searchQuery }))}
-        />
-        <DaysPostedFilter onChange={val => setDaysPosted(val)} />
-        <RadiusFilter onChange={val => setRange(val)} />
-        <h3>range: {rangeMap[range]  || 'unlimited'} miles</h3>
+      <div className="header">
+        <div className="col">
+          <SearchBar
+            placeholder='Search Jobs'
+            timeout={750}
+            onChange={(searchQuery) => setQuery(prev => ({ ...prev, job: searchQuery }))}
+          />
+          <DaysPostedFilter onChange={val => setDaysPosted(val)} />
+        </div>
+        <div className="col">
+          <SearchBar
+            placeholder='Search Location'
+            timeout={750}
+            onChange={(searchQuery) => setQuery(prev => ({ ...prev, location: searchQuery }))}
+          />
+          <div className="range">
+            <RadiusFilter onChange={val => setRange(val)} />
+            <div className="range-text">range: {rangeMap[range]  || 'unlimited'} miles</div>
+          </div>
+        </div>
+
       </div>
       <div>
       <div className="results">
         {state === LOADING && <Loading/>}
-        {state === NO_RESULTS && <h4>no results found</h4>}
+        {state === NO_RESULTS && <h4>No results found</h4>}
         {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
       </div>
       </div>
