@@ -1,1 +1,38 @@
 @import '../variables';
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  
+  padding: 15px;
+  background-color: lighten(#00adbb, 70%);
+
+  box-shadow: 0px 1px 3px #b4b4b4;
+
+  .title {
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .attribution {
+      display: flex;
+      justify-content: flex-start;
+
+      .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+    h3, h5 {
+      padding: 0;
+      margin: 0;
+    }
+    h3 {
+      font-size: 30px;
+      text-shadow: 1px 2px 3px lightgrey;
+      color: darken($color-accent, 3%);
+    }
+  }
+}
