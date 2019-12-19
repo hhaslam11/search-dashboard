@@ -6,6 +6,7 @@ import SearchBar from './SearchBar/SearchBar';
 import parseApiData from './helpers/parseApiData';
 import Loading from './Loading/Loading';
 import DaysPostedFilter from './DaysPostedFilter/DaysPostedFilter';
+import useDebounce from './hooks/useDebounce';
 
 import './App.scss';
 import RadiusFilter from './RadiusFilter/RadiusFilter';
@@ -38,6 +39,8 @@ function App() {
   const [state, setState] = useState(EMPTY);
   const [daysPosted, setDaysPosted] = useState(1);
   const [range, setRange] = useState(5);
+  const rangeDebounced = useDebounce(range, 500);
+
   const [query, setQuery] = useState({
     job: '',
     location: ''
@@ -50,8 +53,9 @@ function App() {
       setState(EMPTY);
       return;
     }
+    setState(LOADING);
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=${rangeMap[range]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=${rangeMap[rangeDebounced]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
@@ -76,7 +80,7 @@ function App() {
         });
         setState(listings);
       });
-  }, [query, daysPosted, range]);
+  }, [query, daysPosted, rangeDebounced]);
 
   return (
     <div className="main">
@@ -85,7 +89,6 @@ function App() {
           placeholder='Search Jobs'
           timeout={750}
           onChange={(searchQuery) => {
-            setState(LOADING);
             setQuery(prev => ({ ...prev, job: searchQuery }));
           }}
         />
@@ -93,19 +96,16 @@ function App() {
           placeholder='Search Location'
           timeout={750}
           onChange={(searchQuery) => {
-            setState(LOADING);
             setQuery(prev => ({ ...prev, location: searchQuery }));
           }}
         />
         <DaysPostedFilter
           onChange={val => {
-            setState(LOADING);
             setDaysPosted(val);
           }}
         />
         <RadiusFilter
           onChange={val => {
-            setState(LOADING);
             setRange(val);
           }}
         />
