@@ -11,6 +11,22 @@
   }
 }
 
+.divider {
+  border-bottom: 2px dotted $color-accent;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 30px;
+}
+
+.headline {
+  display: flex;
+  justify-content: center;
+
+  @if $debug {
+    border: 2px solid cyan;
+  }
+}
+
 .search {
   height: 20%;
   display: flex;

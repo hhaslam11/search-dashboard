@@ -87,8 +87,8 @@ function App() {
   return (
     <div className="main">
       <Header/>
+      <h4 className="headline">Find the perfect job.</h4>
       <div className="search">
-
         <div className="col">
           <SearchBar
             placeholder='Search Jobs'
@@ -111,12 +111,11 @@ function App() {
         </div>
 
       </div>
-      <div>
+      <div className="divider"></div>
       <div className="results">
         {state === LOADING && <Loading/>}
         {state === NO_RESULTS && <h4>No results found</h4>}
         {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
-      </div>
       </div>
     </div>
   );
