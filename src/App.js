@@ -8,6 +8,7 @@ import Loading from './Loading/Loading';
 import DaysPostedFilter from './DaysPostedFilter/DaysPostedFilter';
 
 import './App.scss';
+import RadiusFilter from './RadiusFilter/RadiusFilter';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const JOBS_PER_PAGE = 30;
@@ -25,9 +26,18 @@ const daysPostedMap = {
   4: 30
 };
 
+const rangeMap = {
+  1: 10,
+  2: 50,
+  3: 100,
+  4: 500,
+  5: ''
+}
+
 function App() {
   const [state, setState] = useState(EMPTY);
   const [daysPosted, setDaysPosted] = useState(1);
+  const [range, setRange] = useState(5);
   const [query, setQuery] = useState({
     job: '',
     location: ''
@@ -41,7 +51,7 @@ function App() {
       return;
     }
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=25&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=${rangeMap[range]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
@@ -66,7 +76,7 @@ function App() {
         });
         setState(listings);
       });
-  }, [query, daysPosted]);
+  }, [query, daysPosted, range]);
 
   return (
     <div className="main">
@@ -93,6 +103,13 @@ function App() {
             setDaysPosted(val);
           }}
         />
+        <RadiusFilter
+          onChange={val => {
+            setState(LOADING);
+            setRange(val);
+          }}
+        />
+        <h3>range: {rangeMap[range]  || 'unlimited'} miles</h3>
       </div>
       <div>
       <div className="results">
