@@ -85,7 +85,8 @@ function App() {
 
   return (
     <div className="main">
-      <div className="header">
+      <div className="search">
+
         <div className="col">
           <SearchBar
             placeholder='Search Jobs'
@@ -94,6 +95,7 @@ function App() {
           />
           <DaysPostedFilter onChange={val => setDaysPosted(val)} />
         </div>
+
         <div className="col">
           <SearchBar
             placeholder='Search Location'

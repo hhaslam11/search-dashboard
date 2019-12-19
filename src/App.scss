@@ -9,7 +9,7 @@
   }
 }
 
-.header {
+.search {
   height: 20%;
   display: flex;
   justify-content: center;
@@ -31,12 +31,15 @@
     }
   }
   .range {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
+    width: 100%;
+    border-radius: 5px;
+
     .range-text {
+      font-size: 0.8em;
       display: flex;
       justify-content: center;
     }
