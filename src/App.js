@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Header from './Header/Header';
 import JobListing from './JobListing/JobListing';
 import SearchBar from './SearchBar/SearchBar';
 import parseApiData from './helpers/parseApiData';
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <div className="main">
+      <Header/>
       <div className="search">
 
         <div className="col">
