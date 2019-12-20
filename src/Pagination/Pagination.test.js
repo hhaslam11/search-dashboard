@@ -28,38 +28,38 @@ test('should render three buttons given one page', () => {
 });
 
 test('should render five buttons given three pages (prev, 1, 2, 3, next)', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
-  expect(queryByDisplayValue('1')).not.toBeNull();
-  expect(queryByDisplayValue('2')).not.toBeNull();
-  expect(queryByDisplayValue('3')).not.toBeNull();
-  expect(queryByDisplayValue(PREV)).not.toBeNull();
-  expect(queryByDisplayValue(NEXT)).not.toBeNull();
+  const { queryByText } = render(<Pagination pages={3} onChange={() => {}}/>);
+  expect(queryByText('1')).not.toBeNull();
+  expect(queryByText('2')).not.toBeNull();
+  expect(queryByText('3')).not.toBeNull();
+  expect(queryByText(PREV)).not.toBeNull();
+  expect(queryByText(NEXT)).not.toBeNull();
 });
 
 test('should start on first page', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
-  expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
-  expect(queryByDisplayValue('2')).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue('3')).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue(PREV)).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue(NEXT)).not.toHaveClass(SELECTED);
+  const { queryByText } = render(<Pagination pages={3} onChange={() => {}}/>);
+  expect(queryByText('1')).toHaveClass(SELECTED);
+  expect(queryByText('2')).not.toHaveClass(SELECTED);
+  expect(queryByText('3')).not.toHaveClass(SELECTED);
+  expect(queryByText(PREV)).not.toHaveClass(SELECTED);
+  expect(queryByText(NEXT)).not.toHaveClass(SELECTED);
 });
 
 test('should start on second page if specified', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
-  expect(queryByDisplayValue('1')).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue('2')).toHaveClass(SELECTED);
-  expect(queryByDisplayValue('3')).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue(PREV)).not.toHaveClass(SELECTED);
-  expect(queryByDisplayValue(NEXT)).not.toHaveClass(SELECTED);
+  const { queryByText } = render(<Pagination pages={3} onChange={() => {}}/>);
+  expect(queryByText('1')).not.toHaveClass(SELECTED);
+  expect(queryByText('2')).toHaveClass(SELECTED);
+  expect(queryByText('3')).not.toHaveClass(SELECTED);
+  expect(queryByText(PREV)).not.toHaveClass(SELECTED);
+  expect(queryByText(NEXT)).not.toHaveClass(SELECTED);
 });
 
 test('onChange callback should run on page change', () => {
   const mock = jest.fn();
-  const { getByDisplayValue } = render(<Pagination pages={3} onChange={val => mock(val)}/>);
+  const { getByText } = render(<Pagination pages={3} onChange={val => mock(val)}/>);
 
   expect(mock).toHaveBeenCalledTimes(0);
-  fireEvent.click(getByDisplayValue(NEXT));
+  fireEvent.click(getByText(NEXT));
   expect(mock).toHaveBeenCalledTimes(1);
   expect(mock).toHaveBeenCalledWith(2);
 });
@@ -79,71 +79,71 @@ test('onChange callback should not run if no change and specified starting point
 });
 
 test('should only render up to 7 buttons at once', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={10} onChange={() => {}}/>);
-  expect(queryByDisplayValue('1')).not.toBeNull();
-  expect(queryByDisplayValue('2')).not.toBeNull();
-  expect(queryByDisplayValue('3')).not.toBeNull();
-  expect(queryByDisplayValue('4')).not.toBeNull();
-  expect(queryByDisplayValue('5')).not.toBeNull();
-  expect(queryByDisplayValue(PREV)).not.toBeNull();
-  expect(queryByDisplayValue(NEXT)).not.toBeNull();
+  const { queryByText } = render(<Pagination pages={10} onChange={() => {}}/>);
+  expect(queryByText('1')).not.toBeNull();
+  expect(queryByText('2')).not.toBeNull();
+  expect(queryByText('3')).not.toBeNull();
+  expect(queryByText('4')).not.toBeNull();
+  expect(queryByText('5')).not.toBeNull();
+  expect(queryByText(PREV)).not.toBeNull();
+  expect(queryByText(NEXT)).not.toBeNull();
 
   //should only render after clicking through more pages
-  expect(queryByDisplayValue('6')).toBeNull();
-  expect(queryByDisplayValue('7')).toBeNull();
-  expect(queryByDisplayValue('8')).toBeNull();
-  expect(queryByDisplayValue('9')).toBeNull();
-  expect(queryByDisplayValue('10')).toBeNull();
+  expect(queryByText('6')).toBeNull();
+  expect(queryByText('7')).toBeNull();
+  expect(queryByText('8')).toBeNull();
+  expect(queryByText('9')).toBeNull();
+  expect(queryByText('10')).toBeNull();
 });
 
 test('selected page should be in the middle if more than 5 pages', () => {
-  const { queryByDisplayValue, getByDisplayValue } = render(<Pagination pages={10} onChange={() => {}}/>);
+  const { queryByText, getByText } = render(<Pagination pages={10} onChange={() => {}}/>);
   
   // should look like this.
   // [visible] | not visible
   // [prev] [*1*] [2] [3] [4] [5] [next] 6 7 8 9 10
-  expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
-  expect(queryByDisplayValue('6')).toBeNull();
-  fireEvent.click(getByDisplayValue(NEXT));
-  fireEvent.click(getByDisplayValue(NEXT));
-  fireEvent.click(getByDisplayValue(NEXT));
+  expect(queryByText('1')).toHaveClass(SELECTED);
+  expect(queryByText('6')).toBeNull();
+  fireEvent.click(getByText(NEXT));
+  fireEvent.click(getByText(NEXT));
+  fireEvent.click(getByText(NEXT));
 
   // 1 [prev] [2] [3] [*4*] [5] [6] [next] 7 8 9 10
-  expect(queryByDisplayValue('4')).toHaveClass(SELECTED);
-  expect(queryByDisplayValue('1')).toBeNull();
-  expect(queryByDisplayValue('2')).not.toBeNull();
-  expect(queryByDisplayValue('3')).not.toBeNull();
-  expect(queryByDisplayValue('4')).not.toBeNull();
-  expect(queryByDisplayValue('5')).not.toBeNull();
-  expect(queryByDisplayValue('6')).not.toBeNull();
-  expect(queryByDisplayValue('7')).toBeNull();
-  expect(queryByDisplayValue('8')).toBeNull();
-  expect(queryByDisplayValue('9')).toBeNull();
-  expect(queryByDisplayValue('10')).toBeNull();
-  expect(queryByDisplayValue(PREV)).not.toBeNull();
-  expect(queryByDisplayValue(NEXT)).not.toBeNull();
+  expect(queryByText('4')).toHaveClass(SELECTED);
+  expect(queryByText('1')).toBeNull();
+  expect(queryByText('2')).not.toBeNull();
+  expect(queryByText('3')).not.toBeNull();
+  expect(queryByText('4')).not.toBeNull();
+  expect(queryByText('5')).not.toBeNull();
+  expect(queryByText('6')).not.toBeNull();
+  expect(queryByText('7')).toBeNull();
+  expect(queryByText('8')).toBeNull();
+  expect(queryByText('9')).toBeNull();
+  expect(queryByText('10')).toBeNull();
+  expect(queryByText(PREV)).not.toBeNull();
+  expect(queryByText(NEXT)).not.toBeNull();
 });
 
 test('should go to next page when "next" is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}} />);
+  const { getByText, queryByText } = render(<Pagination pages={3} onChange={() => {}} />);
   
-  expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
-  fireEvent.click(getByDisplayValue(NEXT));
-  expect(queryByDisplayValue('2')).toHaveClass(SELECTED);
+  expect(queryByText('1')).toHaveClass(SELECTED);
+  fireEvent.click(getByText(NEXT));
+  expect(queryByText('2')).toHaveClass(SELECTED);
 });
 
 test('should go back a page when "prev" is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} value={2} onChange={() => {}}/>);
+  const { getByText, queryByText } = render(<Pagination pages={3} value={2} onChange={() => {}}/>);
   
-  expect(queryByDisplayValue('2')).toHaveClass(SELECTED);
-  fireEvent.click(getByDisplayValue(PREV));
-  expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
+  expect(queryByText('2')).toHaveClass(SELECTED);
+  fireEvent.click(getByText(PREV));
+  expect(queryByText('1')).toHaveClass(SELECTED);
 });
 
 test('should go to page that is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
+  const { getByText, queryByText } = render(<Pagination pages={3} onChange={() => {}}/>);
 
-  expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
-  fireEvent.click(getByDisplayValue('3'));
-  expect(queryByDisplayValue('3')).toHaveClass(SELECTED);
+  expect(queryByText('1')).toHaveClass(SELECTED);
+  fireEvent.click(getByText('3'));
+  expect(queryByText('3')).toHaveClass(SELECTED);
 });
