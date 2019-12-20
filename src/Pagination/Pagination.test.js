@@ -21,14 +21,14 @@ test('should return null with invalid props', () => {
 });
 
 test('should render three buttons given one page', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={1}/>);
-  expect(queryByDisplayValue('1')).not.toBeNull();
-  expect(queryByDisplayValue(PREV)).not.toBeNull();
-  expect(queryByDisplayValue(NEXT)).not.toBeNull();
+  const { queryByText } = render(<Pagination pages={1} onChange={() => {}}/>);
+  expect(queryByText('1')).not.toBeNull();
+  expect(queryByText(PREV)).not.toBeNull();
+  expect(queryByText(NEXT)).not.toBeNull();
 });
 
 test('should render five buttons given three pages (prev, 1, 2, 3, next)', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3}/>);
+  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
   expect(queryByDisplayValue('1')).not.toBeNull();
   expect(queryByDisplayValue('2')).not.toBeNull();
   expect(queryByDisplayValue('3')).not.toBeNull();
@@ -37,7 +37,7 @@ test('should render five buttons given three pages (prev, 1, 2, 3, next)', () =>
 });
 
 test('should start on first page', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3}/>);
+  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
   expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
   expect(queryByDisplayValue('2')).not.toHaveClass(SELECTED);
   expect(queryByDisplayValue('3')).not.toHaveClass(SELECTED);
@@ -46,7 +46,7 @@ test('should start on first page', () => {
 });
 
 test('should start on second page if specified', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={3}/>);
+  const { queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
   expect(queryByDisplayValue('1')).not.toHaveClass(SELECTED);
   expect(queryByDisplayValue('2')).toHaveClass(SELECTED);
   expect(queryByDisplayValue('3')).not.toHaveClass(SELECTED);
@@ -79,7 +79,7 @@ test('onChange callback should not run if no change and specified starting point
 });
 
 test('should only render up to 7 buttons at once', () => {
-  const { queryByDisplayValue } = render(<Pagination pages={10}/>);
+  const { queryByDisplayValue } = render(<Pagination pages={10} onChange={() => {}}/>);
   expect(queryByDisplayValue('1')).not.toBeNull();
   expect(queryByDisplayValue('2')).not.toBeNull();
   expect(queryByDisplayValue('3')).not.toBeNull();
@@ -97,7 +97,7 @@ test('should only render up to 7 buttons at once', () => {
 });
 
 test('selected page should be in the middle if more than 5 pages', () => {
-  const { queryByDisplayValue, getByDisplayValue } = render(<Pagination pages={10}/>);
+  const { queryByDisplayValue, getByDisplayValue } = render(<Pagination pages={10} onChange={() => {}}/>);
   
   // should look like this.
   // [visible] | not visible
@@ -125,7 +125,7 @@ test('selected page should be in the middle if more than 5 pages', () => {
 });
 
 test('should go to next page when "next" is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} />);
+  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}} />);
   
   expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
   fireEvent.click(getByDisplayValue(NEXT));
@@ -133,7 +133,7 @@ test('should go to next page when "next" is clicked', () => {
 });
 
 test('should go back a page when "prev" is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} value={2}/>);
+  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} value={2} onChange={() => {}}/>);
   
   expect(queryByDisplayValue('2')).toHaveClass(SELECTED);
   fireEvent.click(getByDisplayValue(PREV));
@@ -141,7 +141,7 @@ test('should go back a page when "prev" is clicked', () => {
 });
 
 test('should go to page that is clicked', () => {
-  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3}/>);
+  const { getByDisplayValue, queryByDisplayValue } = render(<Pagination pages={3} onChange={() => {}}/>);
 
   expect(queryByDisplayValue('1')).toHaveClass(SELECTED);
   fireEvent.click(getByDisplayValue('3'));
