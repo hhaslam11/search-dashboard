@@ -4,11 +4,14 @@
   display: flex;
   justify-content: center;
   
+  margin-top: 30px;
+  margin-bottom: 30px;
   
   .btn {
     color: #FFF;
     background-color: lighten($color-accent, 5%);
     
+    cursor: pointer;
     padding: 0px;
     margin: 0px;
     border: 0px;

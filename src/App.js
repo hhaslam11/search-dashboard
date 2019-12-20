@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Header from './Header/Header';
@@ -8,12 +8,13 @@ import parseApiData from './helpers/parseApiData';
 import Loading from './Loading/Loading';
 import RadiusFilter from './RadiusFilter/RadiusFilter';
 import DaysPostedFilter from './DaysPostedFilter/DaysPostedFilter';
+import Pagination from './Pagination/Pagination';
 import useDebounce from './hooks/useDebounce';
 
 import './App.scss';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const JOBS_PER_PAGE = 30;
+const JOBS_PER_PAGE = 20;
 
 // state
 const LOADING = 'loading';
@@ -41,6 +42,8 @@ function App() {
   const [state, setState] = useState(EMPTY);
   const [daysPosted, setDaysPosted] = useState(1);
   const [range, setRange] = useState(5);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(0);
 
   //debounce range so it doesnt spam the api server
   //when dragging the slider
@@ -56,16 +59,22 @@ function App() {
   useEffect(() => {
     if (!query.job && !query.location) {
       setState(EMPTY);
+      setPage(1);
+      setPages(0);
       return;
     }
     setState(LOADING);
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location}&radius_miles=${rangeMap[rangeDebounced]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location}&radius_miles=${rangeMap[rangeDebounced]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=${page}&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);
+          setPage(1);
+          setPages(0);
           return;
         }
+
+        setPages(Math.ceil(res.data.num_paginable_jobs / JOBS_PER_PAGE));
 
         const listings = res.data.jobs.map(el => {
           let job = parseApiData(el);
@@ -85,7 +94,7 @@ function App() {
         });
         setState(listings);
       });
-  }, [query, daysPosted, rangeDebounced]);
+  }, [query, daysPosted, rangeDebounced, page]);
 
   return (
     <div className="main">
@@ -120,6 +129,11 @@ function App() {
         {state === NO_RESULTS && <h4>No results found</h4>}
         {state !== LOADING && state !== EMPTY && state !== NO_RESULTS ? state : null}
       </div>
+      {pages ? <Pagination
+        pages={pages || 1}
+        onChange={val => setPage(val)}
+        value={page}
+      /> : ''}
     </div>
   );
 }
