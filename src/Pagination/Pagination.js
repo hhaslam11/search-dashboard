@@ -24,38 +24,45 @@ export default props => {
   
   const [state, setState] = useState(props.value || 1);
 
+  const prev = <button disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
+  const next = <button disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
+
   const onChange = val => {
     setState(val);
     props.onChange(val);
   };
 
-  // if props.pages is <= 5, then we dont have to dynamically render the boxes.
-  // thats what this block is for.
-  if (props.pages <= 5) {
-    const buttons = [];
-    
-    for (let i = 1; i <= props.pages; i++) {
-      buttons.push((
-        <button
-          onClick={() => onChange(i)}
-          className={state === i && 'pagination-selected'}
-        >
-          {i}
-        </button>
-      ));
-    }
-
-    return (
-      <div className="pagination">
-        <button disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
-        {buttons}
-        <button disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
-      </div>
-    )
+  // figure out the range of button numbers to render
+  let rangeMin, rangeMax;
+  if (props.pages <= 5 || state <= 3) {
+    rangeMin = 1;
+    rangeMax = props.pages > 5 ? 5 : props.pages;
+  } else if (state >= (props.pages - 2)) {
+    rangeMin = props.pages - 4;
+    rangeMax = props.pages;
+  } else {
+    rangeMin = state - 2;
+    rangeMax = state + 2;
   }
 
-  //if > 5, will be more difficult
+  // generate buttons
+  const buttons = [];
+  for (let i = rangeMin; i <= rangeMax; i++) {
+    buttons.push((
+      <button
+        onClick={() => onChange(i)}
+        className={state === i && 'pagination-selected'}
+      >
+        {i}
+      </button>
+    ));
+  }
+
   return (
-    <h5>Pagination</h5>
+    <div className="pagination">
+      {prev}
+      {buttons}
+      {next}
+    </div>
   )
 };
