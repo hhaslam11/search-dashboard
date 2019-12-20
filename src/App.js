@@ -41,6 +41,9 @@ function App() {
   const [state, setState] = useState(EMPTY);
   const [daysPosted, setDaysPosted] = useState(1);
   const [range, setRange] = useState(5);
+
+  //debounce range so it doesnt spam the api server
+  //when dragging the slider
   const rangeDebounced = useDebounce(range, 500);
 
   const [query, setQuery] = useState({
@@ -57,7 +60,7 @@ function App() {
     }
     setState(LOADING);
 
-    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location},%20CA&radius_miles=${rangeMap[rangeDebounced]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
+    axios.get(`https://api.ziprecruiter.com/jobs/v1?search=${query.job}&location=${query.location}&radius_miles=${rangeMap[rangeDebounced]}&days_ago=${daysPostedMap[daysPosted]}&jobs_per_page=${JOBS_PER_PAGE}&page=1&api_key=${API_KEY}`)
       .then(res => {
         if (res.data.jobs.length === 0) {
           setState(NO_RESULTS);

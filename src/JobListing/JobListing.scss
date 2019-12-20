@@ -22,12 +22,12 @@
   box-shadow: 2px 2px 3px grey;
 
   .job-title {
-    font-size: large;
+    font-size: 23px;
     text-overflow: clip;
     height: 40%;
 
     .job-company {
-      font-size: small;
+      font-size: 16px;
 
       a {
         color: darken($color-accent, 5%);
@@ -45,7 +45,7 @@
       justify-content: space-between;
       
       color: lighten(black, 20%);
-      font-size: small;
+      font-size: 16px;
 
       padding-top: 7px;
       
@@ -59,7 +59,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-  
+        margin-left: 5px;
   
         @if $debug {
           border: 2px solid purple;
@@ -77,8 +77,8 @@
   }
 
   .job-description {
-    font-size: small;
     color: lighten(black, 20%);
+    font-size: 16px;
     
     height: 30%;
 
@@ -110,7 +110,7 @@
       justify-content: flex-end;
 
       color: lighten(black, 50%);
-      font-size: x-small;
+      font-size: 13px;
 
       @if $debug {
         border: 2px solid cyan;
@@ -118,6 +118,10 @@
     }
 
     a.job-apply {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
       background-color: $color-accent;
       color: #fff;
 
@@ -132,7 +136,7 @@
       }
 
       @if $debug {
-        border: 2px solid #3c7c54;
+        border: 2px solid #3c407c;
       }
     }
     @if $debug {
