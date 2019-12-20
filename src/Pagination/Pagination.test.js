@@ -46,7 +46,7 @@ test('should start on first page', () => {
 });
 
 test('should start on second page if specified', () => {
-  const { queryByText } = render(<Pagination pages={3} onChange={() => {}}/>);
+  const { queryByText } = render(<Pagination pages={3} value={2} onChange={() => {}}/>);
   expect(queryByText('1')).not.toHaveClass(SELECTED);
   expect(queryByText('2')).toHaveClass(SELECTED);
   expect(queryByText('3')).not.toHaveClass(SELECTED);
