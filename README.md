@@ -7,6 +7,7 @@ Some features include:
 - Sass as the css pre-processer and not external UI frameworks
 - Custom debounce hook
 
+![screenshot of application](https://github.com/hhaslam11/search-dashboard/docs/screenshot.png)
 ## Getting Started
 
 ### Versions
