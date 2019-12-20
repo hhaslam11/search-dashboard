@@ -17,6 +17,12 @@ storiesOf('Pagination', module)
       />
     )
   })
+  .add('with pre-selected page', () => {
+    return (
+      <Pagination
+      />
+    )
+  })
   .add('with different render on each page', () => {
     return (
       <Pagination
