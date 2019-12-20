@@ -1,8 +1,31 @@
 @import '../variables';
 
 .pagination {
+  display: flex;
+  justify-content: center;
+  
+  
+  .btn {
+    color: #FFF;
+    background-color: lighten($color-accent, 5%);
+    
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
 
-  .pagination-selected {
-    background-color: red;
+    width: 30px;
+    height: 40px;
+
+    &.pagination-selected {
+      background-color: darken($color-accent, 5%);
+    }
+
+    &.prev-next {
+      width: 80px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
   }
+
+  
 }

@@ -31,14 +31,14 @@ export default props => {
   }
 
   // generate buttons
-  const prev = <button disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
-  const next = <button disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
+  const prev = <button className="btn prev-next" disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
+  const next = <button className="btn prev-next" disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
   const buttons = [];
   for (let i = rangeMin; i <= rangeMax; i++) {
     buttons.push((
       <button
         onClick={() => onChange(i)}
-        className={state === i ? 'pagination-selected' : ''}
+        className={'btn' + (state === i ? ' pagination-selected' : '')}
         key={i}
       >
         {i}
