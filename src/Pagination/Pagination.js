@@ -9,23 +9,8 @@ import './Pagination.scss';
  */
 export default props => {
   if (!props.onChange || !props.pages) return null;
-  
-  // Don't need to worry about any conditional rendering if theres only
-  // a single page. All the fancy logic will be below this if block
-  if (props.pages === 1) {
-    return (
-      <div className="pagination">
-        <button disabled>prev</button>
-        <button className="pagination-selected">1</button>
-        <button disabled>next</button>
-      </div>
-    )
-  }
-  
+    
   const [state, setState] = useState(props.value || 1);
-
-  const prev = <button disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
-  const next = <button disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
 
   const onChange = val => {
     setState(val);
@@ -46,12 +31,15 @@ export default props => {
   }
 
   // generate buttons
+  const prev = <button disabled={state === 1} onClick={() => onChange(state - 1)}>prev</button>
+  const next = <button disabled={state === props.pages} onClick={() => onChange(state + 1)}>next</button>
   const buttons = [];
   for (let i = rangeMin; i <= rangeMax; i++) {
     buttons.push((
       <button
         onClick={() => onChange(i)}
-        className={state === i && 'pagination-selected'}
+        className={state === i ? 'pagination-selected' : ''}
+        key={i}
       >
         {i}
       </button>
