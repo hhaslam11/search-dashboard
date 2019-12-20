@@ -3,6 +3,7 @@
  * @param {object} apiData job object from zipSearch api
  * @return {object} parsed object
  * {
+ *  id
  *  city
  *  url
  *  country
@@ -19,6 +20,7 @@ export default apiData => {
   if (typeof apiData !== 'object') return null;
 
   return {
+    id: apiData.id,
     city: apiData.city ? apiData.city : null,
     url: apiData.url ? apiData.url : null,
     country: apiData.country ? apiData.country : null,
