@@ -24,7 +24,7 @@ export default function JobListing(props) {
     !props.jobName ||
     !props.jobDesc ||
     !props.posted) {
-      console.log('warning: canceling render of job listing because the required information isnt avaliable.');
+      console.log('canceling render of job listing because the required information isnt avaliable.');
       return null;
     }
 

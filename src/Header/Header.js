@@ -6,7 +6,6 @@ import './Header.scss';
  * A mock/placeholder header. Not really meant to do much
  */
 export default () => {
-
   return (
     <div className="header">
       <div className="title">

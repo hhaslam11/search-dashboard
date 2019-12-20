@@ -22,9 +22,10 @@
   box-shadow: 2px 2px 3px grey;
 
   .job-title {
+    height: 40%;
+
     font-size: 23px;
     text-overflow: clip;
-    height: 40%;
 
     .job-company {
       font-size: 16px;
@@ -59,6 +60,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        
         margin-left: 5px;
   
         @if $debug {
