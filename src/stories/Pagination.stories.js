@@ -5,13 +5,21 @@ import Pagination from '../Pagination/Pagination';
 
 storiesOf('Pagination', module)
   .add('no props (should be blank)', () => <Pagination/>)
-  .add('with one page', () => <Pagination pages={1}/>)
-  .add('with 3 pages', () => <Pagination pages={3}/>)
+  .add('with one page', () => <Pagination pages={1} onChange={() => {}} />)
+  .add('with 3 pages', () => {
+    return (
+      <Pagination
+        pages={3}
+        onChange={() => {}}
+      />
+    )
+  })
   .add('with pre-selected page (page 2)', () => {
     return (
       <Pagination
         pages={5}
         value={2}
+        onChange={() => {}}
       />
     )
   })
