@@ -16,9 +16,8 @@ test('renders without crashing', () => {
 
 test('should return null with invalid props', () => {
   expect(Pagination({})).toBeNull();
-
-  //with onChange function but no pages value
   expect(Pagination({ onChange: () => {} })).toBeNull();
+  expect(Pagination({ pages: 3 })).toBeNull();
 });
 
 test('should render three buttons given one page', () => {
