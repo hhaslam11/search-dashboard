@@ -32,5 +32,8 @@ Builds an optimized version of the app
 ### `npm test`
 Run tests using Jest
 
+### `npm run coverage`
+Get a test coverage report
+
 ### `npm run storybook`
 Run storybook to view individual components
