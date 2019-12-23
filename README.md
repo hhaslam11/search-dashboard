@@ -4,7 +4,7 @@ Some features include:
 - A filter-as-you-type system, advanced filters such as radius and time posted, and pagination.
 - 50 tests across 10 test suites/files using Jest and React Testing Library
 - 7 individual and reusable component, build independently in [storybook](https://storybook.js.org/) (run `npm run storybook`)
-- Sass as the css pre-processer and not external UI frameworks
+- Sass as the css pre-processer and no external UI frameworks
 - Custom debounce hook
 
 ![screenshot of application](docs/screenshot.png)
